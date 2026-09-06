@@ -73,7 +73,6 @@ function App() {
       // =========================
 
       peerId.current = null;
-
     } catch (error) {
       console.error("CLEANUP ERROR:", error);
     } finally {
@@ -114,11 +113,10 @@ function App() {
         // GET CAMERA + MIC
         // =========================
 
-        const stream =
-          await navigator.mediaDevices.getUserMedia({
-            video: true,
-            audio: true,
-          });
+        const stream = await navigator.mediaDevices.getUserMedia({
+          video: true,
+          audio: true,
+        });
 
         myStream.current = stream;
 
@@ -145,8 +143,7 @@ function App() {
         pc.ontrack = (event) => {
           try {
             if (otherVideoRef.current) {
-              otherVideoRef.current.srcObject =
-                event.streams[0];
+              otherVideoRef.current.srcObject = event.streams[0];
             }
 
             setStatus("Connected");
@@ -290,10 +287,7 @@ function App() {
     socket.on("offer", handleOffer);
     socket.on("answer", handleAnswer);
     socket.on("ice-candidate", handleIceCandidate);
-    socket.on(
-      "peer-disconnected",
-      handlePeerDisconnected
-    );
+    socket.on("peer-disconnected", handlePeerDisconnected);
 
     // =========================
     // COMPONENT CLEANUP
@@ -303,14 +297,8 @@ function App() {
       socket.off("matched", handleMatched);
       socket.off("offer", handleOffer);
       socket.off("answer", handleAnswer);
-      socket.off(
-        "ice-candidate",
-        handleIceCandidate
-      );
-      socket.off(
-        "peer-disconnected",
-        handlePeerDisconnected
-      );
+      socket.off("ice-candidate", handleIceCandidate);
+      socket.off("peer-disconnected", handlePeerDisconnected);
     };
   }, []);
 
@@ -331,13 +319,15 @@ function App() {
       // clear refs,
       // and refresh page
       cleanupCall();
-
     } catch (error) {
       console.error("END CALL ERROR:", error);
 
       // cleanupCall also refreshes
       cleanupCall();
     }
+  };
+  const changePerson = () => {
+    endCall();
   };
 
   // =========================
@@ -346,8 +336,7 @@ function App() {
 
   const toggleMyAudio = () => {
     try {
-      const audioTrack =
-        myStream.current?.getAudioTracks()[0];
+      const audioTrack = myStream.current?.getAudioTracks()[0];
 
       if (audioTrack) {
         audioTrack.enabled = !audioTrack.enabled;
@@ -365,8 +354,7 @@ function App() {
 
   const toggleMyVideo = () => {
     try {
-      const videoTrack =
-        myStream.current?.getVideoTracks()[0];
+      const videoTrack = myStream.current?.getVideoTracks()[0];
 
       if (videoTrack) {
         videoTrack.enabled = !videoTrack.enabled;
@@ -385,8 +373,7 @@ function App() {
   const muteOther = () => {
     try {
       if (otherVideoRef.current) {
-        otherVideoRef.current.muted =
-          !otherVideoRef.current.muted;
+        otherVideoRef.current.muted = !otherVideoRef.current.muted;
       }
     } catch (error) {
       console.error("MUTE OTHER ERROR:", error);
@@ -402,8 +389,7 @@ function App() {
   const hideOtherVideo = () => {
     try {
       if (otherVideoRef.current) {
-        otherVideoRef.current.hidden =
-          !otherVideoRef.current.hidden;
+        otherVideoRef.current.hidden = !otherVideoRef.current.hidden;
       }
     } catch (error) {
       console.error("HIDE OTHER VIDEO ERROR:", error);
@@ -425,22 +411,12 @@ function App() {
       <div>
         <h3>My Video</h3>
 
-        <video
-          ref={myVideoRef}
-          autoPlay
-          playsInline
-          muted
-          width="400"
-        />
+        <video ref={myVideoRef} autoPlay playsInline muted width="400" />
 
         <div>
-          <button onClick={toggleMyAudio}>
-            Mute / Unmute My Audio
-          </button>
+          <button onClick={toggleMyAudio}>Mute / Unmute My Audio</button>
 
-          <button onClick={toggleMyVideo}>
-            Stop / Start My Video
-          </button>
+          <button onClick={toggleMyVideo}>Stop / Start My Video</button>
         </div>
       </div>
 
@@ -451,21 +427,12 @@ function App() {
       <div>
         <h3>Other User</h3>
 
-        <video
-          ref={otherVideoRef}
-          autoPlay
-          playsInline
-          width="400"
-        />
+        <video ref={otherVideoRef} autoPlay playsInline width="400" />
 
         <div>
-          <button onClick={muteOther}>
-            Mute / Unmute Other
-          </button>
+          <button onClick={muteOther}>Mute / Unmute Other</button>
 
-          <button onClick={hideOtherVideo}>
-            Hide / Show Other Video
-          </button>
+          <button onClick={hideOtherVideo}>Hide / Show Other Video</button>
         </div>
       </div>
 
@@ -474,10 +441,9 @@ function App() {
       ========================= */}
 
       <div>
-        <button onClick={endCall}>
-          End Call
-        </button>
+        <button onClick={endCall}>End Call</button>
       </div>
+      <button onClick={changePerson}>Change Person</button>
     </div>
   );
 }
