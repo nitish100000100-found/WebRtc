@@ -1,0 +1,93 @@
+.app {
+  min-height: 100vh;
+  display: flex;
+  font-family: Arial, sans-serif;
+}
+
+/* LEFT SIDEBAR */
+
+.sidebar {
+  width: 280px;
+  min-height: 100vh;
+  padding: 20px;
+  border-right: 1px solid #ddd;
+  background: #f7f7f7;
+}
+
+.sidebar h2 {
+  margin: 0 0 5px;
+}
+
+.userCount {
+  margin: 0 0 20px;
+  color: #777;
+  font-size: 14px;
+}
+
+.userList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.userItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  margin-bottom: 8px;
+  background: white;
+  border-radius: 8px;
+}
+
+.avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #ddd;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-weight: bold;
+}
+
+.username {
+  flex: 1;
+}
+
+.callButton {
+  border: none;
+  background: transparent;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 50%;
+}
+
+.callButton:hover {
+  background: #eee;
+}
+
+/* RIGHT SIDE */
+
+.main {
+  flex: 1;
+  padding: 40px;
+}
+
+.joinForm {
+  display: flex;
+  gap: 10px;
+}
+
+.joinForm input {
+  width: 250px;
+  padding: 10px;
+}
+
+.joinForm button {
+  padding: 10px 20px;
+  cursor: pointer;
+}
