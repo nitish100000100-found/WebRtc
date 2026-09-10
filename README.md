@@ -123,8 +123,6 @@ Open **http://localhost:5173** in two separate browser tabs/windows (or two diff
 ## Known limitations (things to explore next)
 
 Since this was built for learning, there's plenty of room to extend it:
-
-- No TURN server — calls between users on restrictive/symmetric NATs may fail to connect (only a STUN server is configured). Adding a TURN server would fix this.
 - Hardcoded localhost URLs — needs environment variables to work outside local development.
 - No text chat alongside video.
 - No reconnection/retry logic if the signaling socket itself drops mid-call.
